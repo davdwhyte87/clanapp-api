@@ -1,11 +1,9 @@
 # Clanapp
-
-iReporter enables users  to bring any form of corruption to the notice of appropriate authorities and the general public
-
+clan is a system for reaching out to people. It brings investors closer to people with ideas and helps share information.
 
 
 ## Project Overview
-**clan api** clan is a system for reaching out to people. It brings investors closer to people with ideas and helps share information.
+**clan api** This is the api powering the clan app. It is been built with Node js.
 
 ## Features
 
