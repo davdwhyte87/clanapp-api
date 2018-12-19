@@ -4,7 +4,7 @@
   "description": "API for the clan platform",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": " npm run build && mocha dist/test/*.js --exit --timeout 10000",
     "clean": "rimraf dist",
     "build": "npm run clean && babel -d ./dist ./ -s --ignore node_modules",
     "start": "npm run build &&  nodemon server.js --exec babel-node --presets env"

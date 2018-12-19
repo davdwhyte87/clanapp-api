@@ -30,12 +30,13 @@ app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', '*');
     res.header('Access-Control-Allow-Methods', '*');
+    next();
 });
 
 // set base endpoint
-const generalPrefix = 'api/v1';
-app.use(generalPrefix + '/', (req, res) => {
-    res.status(200).json({ status: 200, message: 'Welcome to clan api' });
+const generalPrefix = '/api/v1';
+app.get(generalPrefix, (req, res) => {
+    res.status(200).send({ status: 200, message: 'Welcome to clan api' });
 });
 
 app.use('*', (req, res) => res.status(404).send({
