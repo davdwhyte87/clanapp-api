@@ -2,12 +2,13 @@
   "name": "clanapp-api",
   "version": "1.0.0",
   "description": "API for the clan platform",
-  "main": "index.js",
+  "main": ".eslintrc.js",
   "scripts": {
     "test": " npm run build && mocha dist/test/*.js --exit --timeout 10000",
     "clean": "rimraf dist",
     "build": "npm run clean && babel -d ./dist ./ -s --ignore node_modules",
-    "start": "npm run build &&  nodemon server.js --exec babel-node --presets env"
+    "start": "npm run build &&  nodemon server.js --exec babel-node --presets env",
+    "coverage": "istanbul cover  ./node_modules/mocha/bin/_mocha -- -R spec ./dist/test/*.js --exit"
   },
   "repository": {
     "type": "git",
@@ -25,6 +26,7 @@
   },
   "homepage": "https://github.com/davdwhyte87/clanapp-api#readme",
   "dependencies": {
+    "babel-eslint": "^10.0.1",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "http": "0.0.0",
