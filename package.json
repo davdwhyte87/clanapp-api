@@ -1,0 +1,50 @@
+{
+  "name": "clanapp-api",
+  "version": "1.0.0",
+  "description": "API for the clan platform",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "clean": "rimraf dist",
+    "build": "npm run clean && babel -d ./dist ./ -s --ignore node_modules",
+    "start": "npm run build &&  nodemon server.js --exec babel-node --presets env"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davdwhyte87/clanapp-api.git"
+  },
+  "keywords": [
+    "Node",
+    "js",
+    "JavaScript"
+  ],
+  "author": "David whyte",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/davdwhyte87/clanapp-api/issues"
+  },
+  "homepage": "https://github.com/davdwhyte87/clanapp-api#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "http": "0.0.0",
+    "morgan": "^1.9.1",
+    "nodemon": "^1.18.9",
+    "rimraf": "^2.6.2"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
+    "babel-watch": "^2.0.7",
+    "chai": "^4.1.2",
+    "chai-http": "^4.2.0",
+    "coveralls": "^3.0.2",
+    "eslint": "^5.5.0",
+    "eslint-config-airbnb-base": "13.1.0",
+    "eslint-plugin-import": "2.14.0",
+    "istanbul": "^0.4.5",
+    "mocha": "^5.2.0",
+    "mongoose": "^5.3.9"
+  }
+}
