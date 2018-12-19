@@ -15,7 +15,6 @@ module.exports = {
                   "ClassDeclaration": true
               }
           }],
-        "linebreak-style": ["error", "windows"],
         "consistent-return":["off"],
         "prefer-template": ["off"],
         "class-methods-use-this": ["off"]

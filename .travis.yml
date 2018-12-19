@@ -1,0 +1,12 @@
+language: node_js
+node_js:
+  - "8.11.4"
+services: 
+- postgres
+
+script:
+  - npm run build
+  - npm run coverage
+
+before_install:
+- npm i -g babel-preset-env mocha chai babel-cli istanbul coveralls
