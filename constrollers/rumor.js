@@ -27,4 +27,19 @@ const create = (req, res) => {
     });
 };
 
-export default create;
+/**
+ * This function gets all the rumors from the database
+ * @param {Object} req - request object
+ * @param {Object} res - response object
+ * @returns {Object} - response object
+ */
+const getAll = (req, res) => {
+  Rumor.find({}).exec().then((rumorData) => {
+    res.status(200).json({ status: 200, data: rumorData });
+  })
+    .catch((error) => {
+      console.log(error);
+      res.status(400).json({ status: 400, error: 'An error occurred' });
+    });
+};
+export { create, getAll };
