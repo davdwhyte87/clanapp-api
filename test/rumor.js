@@ -66,4 +66,34 @@ describe('Fetch fumors', () => {
       done();
     });
   });
+
+  it('should not get a single rumor with wrong id', (done) => {
+    chai.request(app).get('/api/v1/rumors/' + exampleRumorId + 344).end((err, res) => {
+      res.should.have.status(404);
+      res.body.should.be.a('object');
+      res.body.should.have.property('error');
+      done();
+    });
+  });
+});
+
+describe('Update rumor', () => {
+  it('should update a record', (done) => {
+    chai.request(app).patch('/api/v1/rumors/' + exampleRumorId).send()
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.body.should.be.a('object');
+        done();
+      });
+  });
+
+  it('should not update a record with wrong id', (done) => {
+    chai.request(app).patch('/api/v1/rumors/' + exampleRumorId + 992).send()
+      .end((err, res) => {
+        res.should.have.status(404);
+        res.body.should.be.a('object');
+        res.body.should.have.property('error');
+        done();
+      });
+  });
 });
