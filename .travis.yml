@@ -9,4 +9,7 @@ script:
   - npm run coverage
 
 before_install:
-- npm i -g babel-preset-env mocha chai babel-cli istanbul coveralls mongoose
+- npm i -g babel-preset-env mocha chai babel-cli istanbul coveralls pg sequelize
+
+after_script:
+  - ./node_modules/coveralls/bin/coveralls.js < ./coverage/lcov.info  && npm run clean

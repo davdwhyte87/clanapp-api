@@ -1,14 +1,16 @@
-import mongoose from 'mongoose';
+import Sequelize from 'sequelize';
+import dotenv from 'dotenv';
 
-const rumorScehma = mongoose.Schema({
-  _id: mongoose.Schema.Types.ObjectId,
-  title: { type: String, required: true },
-  content: { type: String, required: true },
-  location: { type: String },
-  image: String,
-  like: { type: Array },
-  comment: { type: mongoose.Schema.Types.ObjectId, ref: 'Comment', required: false },
-  created_at: { type: Date, default: Date.now },
+dotenv.config();
+const sequelize = new Sequelize(process.env.DB_URL, { dialect: 'postgres', logging: false });
+
+const Rumor = sequelize.define('rumor', {
+  id: { type: Sequelize.BIGINT, allowNull: false, primaryKey: true },
+  title: { type: Sequelize.STRING, allowNull: false },
+  content: { type: Sequelize.TEXT, allowNull: false },
+  location: Sequelize.STRING,
+  image: Sequelize.TEXT,
 });
 
-export default mongoose.model('Rumor', rumorScehma);
+sequelize.sync();
+export default Rumor;

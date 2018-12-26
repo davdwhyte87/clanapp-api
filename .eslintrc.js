@@ -17,6 +17,7 @@ module.exports = {
           }],
         "consistent-return":["off"],
         "prefer-template": ["off"],
-        "class-methods-use-this": ["off"]
+        "class-methods-use-this": ["off"],
+        "linebreak-style": ["off"]
     }
 };

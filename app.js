@@ -3,7 +3,7 @@ import bodyParser from 'body-parser';
 import morgan from 'morgan';
 import expressValidator from 'express-validator';
 import dotenv from 'dotenv';
-import mongoose from 'mongoose';
+
 
 // import routers
 import rumorRouter from './routes/rumor';
@@ -17,7 +17,7 @@ app.use(expressValidator());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 // setup database
-mongoose.connect(process.env.DB_URL, { useNewUrlParser: true });
+
 // set up morgan
 app.use(morgan('dev'));
 app.use((req, res, next) => {

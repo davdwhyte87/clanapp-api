@@ -1,6 +1,5 @@
-import mongoose from 'mongoose';
 import Rumor from '../models/Rumor';
-
+import createId from '../helpers/idGenerator';
 /**
  * This function creates a new rumor
  * @param {Object} req - request object
@@ -8,24 +7,22 @@ import Rumor from '../models/Rumor';
  * @returns {Object} - response object
  */
 const create = (req, res) => {
-  const rumor = Rumor({
-    _id: new mongoose.Types.ObjectId(),
+  Rumor.create({
+    id: createId(),
     title: req.body.title,
     content: req.body.content,
-    image: req.body.image,
     location: req.body.location,
-  });
-  rumor.save().then((rumorData) => {
-    res.status(201).json({
-      status: 200,
-      data: [{ id: rumorData.id, message: 'Rumor created successfully' }],
-    });
+    image: req.body.image,
+  }).then((data) => {
+    data.toJSON();
+    res.status(201).json({ status: 201, data: [{ id: data.id, message: 'Rumor created!' }] });
   })
     .catch((error) => {
       console.log(error);
-      res.status(400).json({ status: 400, error: 'An error occurred' });
+      res.status(400).json({ status: 400, error: 'An error occured' });
     });
 };
+
 
 /**
  * This function gets all the rumors from the database
@@ -34,12 +31,12 @@ const create = (req, res) => {
  * @returns {Object} - response object
  */
 const getAll = (req, res) => {
-  Rumor.find({}).exec().then((rumorData) => {
+  Rumor.findAll({ raw: true }).then((rumorData) => {
     res.status(200).json({ status: 200, data: rumorData });
   })
     .catch((error) => {
       console.log(error);
-      res.status(400).json({ status: 400, error: 'An error occurred' });
+      res.status(400).json({ status: 400, error: 'An error occured' });
     });
 };
 export { create, getAll };

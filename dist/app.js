@@ -24,10 +24,6 @@ var _dotenv = require('dotenv');
 
 var _dotenv2 = _interopRequireDefault(_dotenv);
 
-var _mongoose = require('mongoose');
-
-var _mongoose2 = _interopRequireDefault(_mongoose);
-
 var _rumor = require('./routes/rumor');
 
 var _rumor2 = _interopRequireDefault(_rumor);
@@ -46,7 +42,7 @@ app.use((0, _expressValidator2.default)());
 app.use(_bodyParser2.default.urlencoded({ extended: false }));
 app.use(_bodyParser2.default.json());
 // setup database
-_mongoose2.default.connect(process.env.DB_URL, { useNewUrlParser: true });
+
 // set up morgan
 app.use((0, _morgan2.default)('dev'));
 app.use((req, res, next) => {

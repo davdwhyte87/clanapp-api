@@ -43,3 +43,14 @@ describe('Test for rumor features', () => {
       });
   });
 });
+
+describe('Fetching rumors', () => {
+  it('should get all rumors', (done) => {
+    chai.request(app).get('/api/v1/rumors').end((err, res) => {
+      res.should.have.status(200);
+      res.body.should.have.property('data');
+      res.body.should.be.a('object');
+      done();
+    });
+  });
+});
