@@ -15,6 +15,14 @@ const validator = (method) => {
           .isString().isLength({ min: 40, max: 1000 }),
       ];
     }
+    case 'update-rumor': {
+      return [
+        check.body('title', 'A valid title is required').optional()
+          .isString().isLength({ min: 5, max: 30 }),
+        check.body('content', 'A valid content is required. Minimum of 40 characters required.').optional()
+          .isString().isLength({ min: 40, max: 1000 }),
+      ];
+    }
     default: {
       return [];
     }

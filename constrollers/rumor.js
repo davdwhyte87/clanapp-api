@@ -43,6 +43,12 @@ const getAll = (req, res) => {
     });
 };
 
+/**
+ * Get single rumor
+ * @param {Object} req - request object
+ * @param {Object} res - response object
+ * @return {Object} - response object
+ */
 const getSingle = (req, res) => {
   const rumorId = req.params.id;
   Rumor.findOne({ _id: rumorId }).exec().then((rumorData) => {
@@ -50,7 +56,40 @@ const getSingle = (req, res) => {
   })
     .catch((error) => {
       console.log(error);
-      res.status(400).json({ status: 400, error: 'An error occurred' });
+      res.status(404).json({ status: 404, error: 'An error occurred' });
     });
 };
-export { create, getAll, getSingle };
+
+
+/**
+ * Update single rumor
+ * @param {Object} req - request object
+ * @param {Object} res - response object
+ * @return {Object} - response object
+ */
+const update = (req, res) => {
+  const rumorId = req.params.id;
+  Rumor.findOne({ _id: rumorId }).exec().then((rumorData) => {
+    Rumor.updateOne({ _id: rumorId }, {
+      $set: {
+        title: req.body.title || rumorData.title,
+        content: req.body.content || rumorData.content,
+        location: req.body.location || rumorData.location,
+      },
+    }).exec().then(() => res.status(200).json({ status: 200, data: [{ _id: rumorId, message: 'Rumor updated!' }] }))
+      .catch((error) => {
+        console.log(error);
+        return res.status(400).json({ status: 400, error: 'An error occurred' });
+      });
+  })
+    .catch((error) => {
+      console.log(error);
+      return res.status(404).json({ status: 404, error: 'An error occurred' });
+    });
+};
+export {
+  create,
+  getAll,
+  getSingle,
+  update,
+};
