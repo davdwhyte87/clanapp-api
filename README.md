@@ -1,4 +1,4 @@
-[![Coverage Status](https://coveralls.io/repos/github/davdwhyte87/clanapp-api/badge.svg?branch=master)](https://coveralls.io/github/davdwhyte87/clanapp-api?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/davdwhyte87/clanapp-api/badge.svg?branch=develop)](https://coveralls.io/github/davdwhyte87/clanapp-api?branch=develop)
 [![Build Status](https://travis-ci.org/davdwhyte87/clanapp-api.svg?branch=develop)](https://travis-ci.org/davdwhyte87/clanapp-api)
 # Clanapp
 clan is a system for reaching out to people. It brings investors closer to people with ideas and helps share information.
