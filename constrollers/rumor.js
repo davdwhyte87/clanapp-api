@@ -42,4 +42,15 @@ const getAll = (req, res) => {
       res.status(400).json({ status: 400, error: 'An error occurred' });
     });
 };
-export { create, getAll };
+
+const getSingle = (req, res) => {
+  const rumorId = req.params.id;
+  Rumor.findOne({ _id: rumorId }).exec().then((rumorData) => {
+    res.status(200).json({ status: 200, data: rumorData });
+  })
+    .catch((error) => {
+      console.log(error);
+      res.status(400).json({ status: 400, error: 'An error occurred' });
+    });
+};
+export { create, getAll, getSingle };
