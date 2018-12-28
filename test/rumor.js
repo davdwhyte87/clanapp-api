@@ -30,6 +30,7 @@ describe('Test for rumor features', () => {
         res.should.have.status(201);
         res.body.should.have.property('data');
         res.body.should.be.a('object');
+        exampleRumorId = res.body.data[0].id;
         done();
       });
   });
@@ -54,7 +55,6 @@ describe('Fetch fumors', () => {
       res.should.have.status(200);
       res.body.should.be.a('object');
       res.body.should.have.property('data');
-      exampleRumorId = res.body.data[0]._id;
       done();
     });
   });
@@ -70,7 +70,7 @@ describe('Fetch fumors', () => {
 
   it('should not get a single rumor with wrong id', (done) => {
     chai.request(app).get('/api/v1/rumors/' + exampleRumorId + 344).end((err, res) => {
-      res.should.have.status(404);
+      res.should.have.status(400);
       res.body.should.be.a('object');
       res.body.should.have.property('error');
       done();
@@ -91,10 +91,20 @@ describe('Update rumor', () => {
   it('should not update a record with wrong id', (done) => {
     chai.request(app).patch('/api/v1/rumors/' + exampleRumorId + 992).send()
       .end((err, res) => {
-        res.should.have.status(404);
+        res.should.have.status(400);
         res.body.should.be.a('object');
         res.body.should.have.property('error');
         done();
       });
+  });
+});
+
+describe('Delete a rumor', () => {
+  it('should delete a rumor', (done) => {
+    chai.request(app).del('/api/v1/rumors/' + exampleRumorId).end((err, res) => {
+      res.should.have.status(200);
+      res.body.should.be.a('object');
+      done();
+    });
   });
 });

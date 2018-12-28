@@ -4,6 +4,7 @@ import {
   getAll,
   getSingle,
   update,
+  deleteRumor,
 } from '../constrollers/rumor';
 import validator from '../helpers/validators';
 import handleValidation from '../helpers/handle-validation';
@@ -14,5 +15,5 @@ rumorRouter.post('/', validator('create-rumor'), handleValidation, create);
 rumorRouter.get('/', getAll);
 rumorRouter.get('/:id', getSingle);
 rumorRouter.patch('/:id', validator('update-rumor'), handleValidation, update);
-
+rumorRouter.delete('/:id', deleteRumor);
 export default rumorRouter;
