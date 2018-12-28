@@ -26,6 +26,7 @@ describe('Test for rumor features', () => {
     };
     chai.request(app).post('/api/v1/rumors').send(rumor)
       .end((err, res) => {
+        console.log(err);
         res.should.have.status(201);
         res.body.should.have.property('data');
         res.body.should.be.a('object');
