@@ -29,7 +29,7 @@ describe('Create employment', () => {
       res.should.have.status(201);
       res.body.should.have.property('data');
       res.body.should.be.a('object');
-      exampleEmploymentId = res.body.data[0]._id;
+      exampleEmploymentId = res.body.data[0].id;
       done();
     });
   });
@@ -52,5 +52,29 @@ describe('Create employment', () => {
       res.body.should.be.a('object');
       done();
     });
+  });
+});
+
+
+describe('Employment update', () => {
+  it('should update an employment', (done) => {
+    const employment = { title: 'Laravel Junior developer' };
+    chai.request(app).patch('/api/v1/employments/' + exampleEmploymentId).send(employment)
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.body.should.have.property('data');
+        res.body.should.be.a('object');
+        done();
+      });
+  });
+  it('should not update an employment with a wrong id', (done) => {
+    const employment = { title: 'Laravel Junior developer' };
+    chai.request(app).patch('/api/v1/employments/' + exampleEmploymentId + 90).send(employment)
+      .end((err, res) => {
+        res.should.have.status(400);
+        res.body.should.have.property('error');
+        res.body.should.be.a('object');
+        done();
+      });
   });
 });
