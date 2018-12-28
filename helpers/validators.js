@@ -35,6 +35,18 @@ const validator = (method) => {
           .isString().isLength({ min: 300 }),
       ];
     }
+    case 'update-employment': {
+      return [
+        check.body('title', 'A valid title is required').optional()
+          .isString().isLength({ min: 5, max: 30 }),
+        check.body('description', 'A valid description is required. Minimum of 40 characters required.').optional()
+          .isString().isLength({ min: 40, max: 1000 }),
+        check.body('email', 'A valid email is required').optional()
+          .isEmail().isLength({ min: 5, max: 20 }),
+        check.body('image', 'A valid image is required').optional()
+          .isString().isLength({ min: 300 }),
+      ];
+    }
     default: {
       return [];
     }

@@ -1,4 +1,4 @@
-[![Coverage Status](https://coveralls.io/repos/github/davdwhyte87/clanapp-api/badge.svg?branch=develop)](https://coveralls.io/github/davdwhyte87/clanapp-api?branch=develop)
+[![Coverage Status](https://coveralls.io/repos/github/davdwhyte87/clanapp-api/badge.svg)](https://coveralls.io/github/davdwhyte87/clanapp-api)
 [![Build Status](https://travis-ci.org/davdwhyte87/clanapp-api.svg?branch=develop)](https://travis-ci.org/davdwhyte87/clanapp-api)
 # Clanapp
 clan is a system for reaching out to people. It brings investors closer to people with ideas and helps share information.
@@ -24,6 +24,15 @@ clan is a system for reaching out to people. It brings investors closer to peopl
 
 ## Api Endpoints
 - `GET /api/v1/rumors` - Fetches all the rumors
+- `GET /api/v1/rumors/:id` - Fetches a single rumor
+- `POST /api/v1/rumors` - Creates a rumor
+- `PATCH /api/v1/rumors/:id` - Updates a single rumor
+- `DELETE /api/v1/rumors` - Deletes a rumor
+- `POST /api/v1/employments` - Creates an employment
+- `GET /api/v1/employments` - Fetches all employments
+- `GET /api/v1/employments/:id` - Fetches a single employment
+- `PATCH /api/v1/employments/:id` - Updates a single employment
+- `DELETE /api/v1/employments` - Deletes an employment
  
  ## Known issues
 - None for now
