@@ -17,7 +17,7 @@ const create = (req, res) => {
   });
   rumor.save().then((rumorData) => {
     res.status(201).json({
-      status: 200,
+      status: 201,
       data: [{ id: rumorData.id, message: 'Rumor created successfully' }],
     });
   })
