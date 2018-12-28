@@ -52,11 +52,14 @@ const getAll = (req, res) => {
 const getSingle = (req, res) => {
   const rumorId = req.params.id;
   Rumor.findOne({ _id: rumorId }).exec().then((rumorData) => {
+    if (!rumorData) {
+      res.status(404).json({ status: 404, error: 'This Rumor does not exist' });
+    }
     res.status(200).json({ status: 200, data: rumorData });
   })
     .catch((error) => {
       console.log(error);
-      res.status(404).json({ status: 404, error: 'An error occurred' });
+      res.status(400).json({ status: 400, error: 'An error occurred' });
     });
 };
 
@@ -70,13 +73,16 @@ const getSingle = (req, res) => {
 const update = (req, res) => {
   const rumorId = req.params.id;
   Rumor.findOne({ _id: rumorId }).exec().then((rumorData) => {
+    if (!rumorData) {
+      res.status(404).json({ status: 404, error: 'This Rumor does not exist' });
+    }
     Rumor.updateOne({ _id: rumorId }, {
       $set: {
         title: req.body.title || rumorData.title,
         content: req.body.content || rumorData.content,
         location: req.body.location || rumorData.location,
       },
-    }).exec().then(() => res.status(200).json({ status: 200, data: [{ _id: rumorId, message: 'Rumor updated!' }] }))
+    }).exec().then(() => res.status(200).json({ status: 200, data: [{ id: rumorId, message: 'Rumor updated!' }] }))
       .catch((error) => {
         console.log(error);
         return res.status(400).json({ status: 400, error: 'An error occurred' });
@@ -84,7 +90,33 @@ const update = (req, res) => {
   })
     .catch((error) => {
       console.log(error);
-      return res.status(404).json({ status: 404, error: 'An error occurred' });
+      return res.status(400).json({ status: 400, error: 'An error occurred' });
+    });
+};
+
+
+/**
+ * Delete single rumor
+ * @param {Object} req - request object
+ * @param {Object} res - response object
+ * @return {Object} - response object
+ */
+const deleteRumor = (req, res) => {
+  const rumorId = req.params.id;
+  Rumor.findOne({ _id: rumorId }).exec().then((rumorData) => {
+    if (!rumorData) {
+      return res.status(404).json({ status: 404, error: 'This Rumor does not exist' });
+    }
+    Rumor.deleteOne({ _id: rumorId }).exec()
+      .then(() => res.status(200).json({ status: 200, data: [{ _id: rumorId, message: 'Rumor deleted!' }] }))
+      .catch((error) => {
+        console.log(error);
+        return res.status(400).json({ status: 400, error: 'An error occurred' });
+      });
+  })
+    .catch((error) => {
+      console.log(error);
+      return res.status(400).json({ status: 400, error: 'An error occurred' });
     });
 };
 export {
@@ -92,4 +124,5 @@ export {
   getAll,
   getSingle,
   update,
+  deleteRumor,
 };
