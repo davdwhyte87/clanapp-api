@@ -99,6 +99,25 @@ describe('Update rumor', () => {
   });
 });
 
+describe('Like rumor', () => {
+  it('should like a rumor', (done) => {
+    chai.request(app).get('/api/v1/rumors/' + exampleRumorId + '/like')
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.body.should.be.a('object');
+        done();
+      });
+  });
+  it('should like a rumor', (done) => {
+    chai.request(app).get('/api/v1/rumors/' + exampleRumorId + '/like')
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.body.should.be.a('object');
+        done();
+      });
+  });
+});
+
 describe('Delete a rumor', () => {
   it('should delete a rumor', (done) => {
     chai.request(app).del('/api/v1/rumors/' + exampleRumorId).end((err, res) => {

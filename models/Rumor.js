@@ -6,7 +6,7 @@ const rumorScehma = mongoose.Schema({
   content: { type: String, required: true },
   location: { type: String },
   image: String,
-  like: { type: Array },
+  like: { type: Array, default: [0, 30903, 93993] },
   comment: { type: mongoose.Schema.Types.ObjectId, ref: 'Comment', required: false },
   created_at: { type: Date, default: Date.now },
 });
