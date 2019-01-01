@@ -119,10 +119,55 @@ const deleteRumor = (req, res) => {
       return res.status(400).json({ status: 400, error: 'An error occurred' });
     });
 };
+
+
+/**
+ * Like or unlike single rumor
+ * @param {Object} req - request object
+ * @param {Object} res - response object
+ * @return {Object} - response object
+ */
+const like = (req, res) => {
+  const userId = 8990;
+  let messageSuccess;
+  const rumorId = req.params.id;
+  Rumor.findOne({ _id: rumorId }).exec().then((rumorData) => {
+    if (!rumorData) {
+      return res.status(404).json({ status: 404, error: 'This Rumor does not exist' });
+    }
+    const newLikes = rumorData.like;
+    if (rumorData.like.includes(userId)) {
+      const userIdIndex = rumorData.like.indexOf(userId);
+      newLikes.splice(userIdIndex, 1);
+      messageSuccess = 'Rumor unliked!';
+    } else {
+      newLikes.push(userId);
+      messageSuccess = 'Rumor liked!';
+    }
+    console.log(newLikes);
+    Rumor.updateOne({ _id: rumorId }, {
+      $set: {
+        like: newLikes,
+      },
+    }).exec().then(() => res.status(200).json({
+      status: 200,
+      data: [{ id: rumorId, message: messageSuccess }],
+    }))
+      .catch((error) => {
+        console.log(error);
+        return res.status(400).json({ status: 400, error: 'An error occurred' });
+      });
+  })
+    .catch((error) => {
+      console.log(error);
+      res.status(400).json({ status: 400, error: 'An error occurred' });
+    });
+};
 export {
   create,
   getAll,
   getSingle,
   update,
   deleteRumor,
+  like,
 };
