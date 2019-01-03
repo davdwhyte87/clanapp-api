@@ -78,3 +78,30 @@ describe('Employment update', () => {
       });
   });
 });
+
+describe('Get Employments', () => {
+  it('should get all the employments in the database', (done) => {
+    chai.request(app).get('/api/v1/employments').end((err, res) => {
+      res.should.have.status(200);
+      res.body.should.have.property('data');
+      res.body.should.be.a('object');
+      done();
+    });
+  });
+  it('should get a single employment ', (done) => {
+    chai.request(app).get('/api/v1/employments/' + exampleEmploymentId).end((err, res) => {
+      res.should.have.status(200);
+      res.body.should.have.property('data');
+      res.body.should.be.a('object');
+      done();
+    });
+  });
+  it('should delete an employment', (done) => {
+    chai.request(app).del('/api/v1/employments/' + exampleEmploymentId).end((err, res) => {
+      res.should.have.status(200);
+      res.body.should.have.property('data');
+      res.body.should.be.a('object');
+      done();
+    });
+  });
+});

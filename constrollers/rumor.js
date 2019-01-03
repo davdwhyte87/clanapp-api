@@ -16,14 +16,14 @@ const create = (req, res) => {
     location: req.body.location,
   });
   rumor.save().then((rumorData) => {
-    res.status(201).json({
+    return res.status(201).json({
       status: 201,
       data: [{ id: rumorData.id, message: 'Rumor created successfully' }],
     });
   })
     .catch((error) => {
       console.log(error);
-      res.status(400).json({ status: 400, error: 'An error occurred' });
+      return res.status(400).json({ status: 400, error: 'An error occurred' });
     });
 };
 
@@ -35,11 +35,11 @@ const create = (req, res) => {
  */
 const getAll = (req, res) => {
   Rumor.find({}).exec().then((rumorData) => {
-    res.status(200).json({ status: 200, data: rumorData });
+    return res.status(200).json({ status: 200, data: rumorData });
   })
     .catch((error) => {
       console.log(error);
-      res.status(400).json({ status: 400, error: 'An error occurred' });
+      return res.status(400).json({ status: 400, error: 'An error occurred' });
     });
 };
 
@@ -53,13 +53,13 @@ const getSingle = (req, res) => {
   const rumorId = req.params.id;
   Rumor.findOne({ _id: rumorId }).exec().then((rumorData) => {
     if (!rumorData) {
-      res.status(404).json({ status: 404, error: 'This Rumor does not exist' });
+      return res.status(404).json({ status: 404, error: 'This Rumor does not exist' });
     }
-    res.status(200).json({ status: 200, data: rumorData });
+    return res.status(200).json({ status: 200, data: rumorData });
   })
     .catch((error) => {
       console.log(error);
-      res.status(400).json({ status: 400, error: 'An error occurred' });
+      return res.status(400).json({ status: 400, error: 'An error occurred' });
     });
 };
 
