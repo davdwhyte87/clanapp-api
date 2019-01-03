@@ -33,6 +33,8 @@ clan is a system for reaching out to people. It brings investors closer to peopl
 - `GET /api/v1/employments/:id` - Fetches a single employment
 - `PATCH /api/v1/employments/:id` - Updates a single employment
 - `DELETE /api/v1/employments` - Deletes an employment
+- `GET /api/v1/employments/:id/like` - Like or unlike an employment
+
  
  ## Known issues
 - None for now

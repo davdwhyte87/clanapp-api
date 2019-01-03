@@ -18,6 +18,7 @@ module.exports = {
         "consistent-return":["off"],
         "prefer-template": ["off"],
         "class-methods-use-this": ["off"],
-        "linebreak-style": ["off"]
+        "linebreak-style": ["off"],
+        "arrow-body-style": ["off"]
     }
 };
