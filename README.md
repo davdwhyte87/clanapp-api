@@ -34,6 +34,7 @@ clan is a system for reaching out to people. It brings investors closer to peopl
 - `PATCH /api/v1/employments/:id` - Updates a single employment
 - `DELETE /api/v1/employments` - Deletes an employment
 - `GET /api/v1/employments/:id/like` - Like or unlike an employment
+- `POST /api/v1/auth/signup` - Signs a user up
 
  
  ## Known issues

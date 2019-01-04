@@ -8,6 +8,7 @@ import mongoose from 'mongoose';
 // import routers
 import rumorRouter from './routes/rumor';
 import employmentRouter from './routes/employment';
+import userRouter from './routes/user';
 
 const app = express();
 // set up dotenv
@@ -41,6 +42,7 @@ app.get(generalPrefix, (req, res) => {
 
 app.use(generalPrefix + '/rumors', rumorRouter);
 app.use(generalPrefix + '/employments', employmentRouter);
+app.use(generalPrefix + '/auth', userRouter);
 app.use('*', (req, res) => res.status(404).send({
   status: 404,
   error: 'This route does not exist. You may navigate to the home route at api/v1',

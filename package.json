@@ -8,7 +8,7 @@
     "clean": "rimraf dist coverage",
     "build": "npm run clean && babel -d ./dist ./ -s --ignore node_modules",
     "start": "npm run build &&  nodemon server.js --exec babel-node --presets env",
-    "coverage": "istanbul cover  ./node_modules/mocha/bin/_mocha -- -R spec ./dist/test/*.js --exit"
+    "coverage": "npm run build && istanbul cover  ./node_modules/mocha/bin/_mocha -- -R spec ./dist/test/*.js --exit"
   },
   "repository": {
     "type": "git",
@@ -27,17 +27,20 @@
   "homepage": "https://github.com/davdwhyte87/clanapp-api#readme",
   "dependencies": {
     "babel-eslint": "^10.0.1",
+    "bcrypt": "^3.0.3",
     "body-parser": "^1.18.3",
+    "cjs-loader": "^0.1.0",
     "dotenv": "^6.2.0",
     "express": "^4.16.4",
     "express-validator": "^5.3.0",
     "http": "0.0.0",
+    "jsonwebtoken": "^8.4.0",
+    "mongoose": "^5.4.0",
     "morgan": "^1.9.1",
     "nodemon": "^1.18.9",
     "pg": "^7.7.1",
     "rimraf": "^2.6.2",
-    "sequelize": "^4.42.0",
-    "mongoose": "^5.4.0"
+    "sequelize": "^4.42.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
