@@ -47,6 +47,18 @@ const validator = (method) => {
           .isString().isLength({ min: 300 }),
       ];
     }
+    case 'create-user': {
+      return [
+        check.body('name', 'A valid name is required')
+          .exists().trim()
+          .isString()
+          .isLength({ min: 2, max: 100 }),
+        check.body('email', 'A valid email is required').exists()
+          .isEmail().isLength({ max: 100 }),
+        check.body('password', 'A valid password is required')
+          .isString().isLength({ min: 4, max: 100 }),
+      ];
+    }
     default: {
       return [];
     }

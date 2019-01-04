@@ -8,15 +8,9 @@ const userScehma = mongoose.Schema({
   location: { type: String },
   phone: String,
   image: String,
-  created_at: { type: Date, required: true },
-});
-
-userScehma.pre('save', (next) => {
-  const now = new Date();
-  if (!this.created_at) {
-    this.created_at = now;
-  }
-  next();
+  isActivated: { type: Boolean, required: true, default: false },
+  code: { type: Number },
+  created_at: { type: Date, required: true, default: Date.now },
 });
 
 export default mongoose.model('User', userScehma);
