@@ -1,9 +1,11 @@
 /* eslint-disable no-underscore-dangle */
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import User from '../models/User';
 
+dotenv.config();
 /**
  * This function creates a new user
  * @param {Object} req - request object
