@@ -1,4 +1,5 @@
 import check from 'express-validator/check';
+import User from '../models/User';
 
 /**
  * Validator function that handles all the validation of input requests on this api
@@ -55,6 +56,28 @@ const validator = (method) => {
           .isLength({ min: 2, max: 100 }),
         check.body('email', 'A valid email is required').exists()
           .isEmail().isLength({ max: 100 }),
+        check.body('email', 'This email already exists').custom(async (value) => {
+          console.log('jsksk');
+          const data = await User.findOne({ email: value }).exec();
+          if (data) {
+            throw new Error('This email already exists');
+          }
+        }),
+        check.body('password', 'A valid password is required')
+          .isString().isLength({ min: 4, max: 100 }),
+      ];
+    }
+    case 'signin': {
+      return [
+        check.body('email', 'A valid email is required').exists()
+          .isEmail().isLength({ max: 100 }),
+        check.body('email', 'This account does not exists').custom(async (value) => {
+          const data = await User.findOne({ email: value }).exec();
+          console.log(data);
+          if (!data) {
+            throw new Error('This account does not exist');
+          }
+        }),
         check.body('password', 'A valid password is required')
           .isString().isLength({ min: 4, max: 100 }),
       ];

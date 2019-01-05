@@ -4,11 +4,21 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../app';
+import Employment from '../models/Employment';
 
 chai.use(chaiHttp);
 const should = chai.should();
 
 let exampleEmploymentId = null;
+
+before('Drop database', (done) => {
+  Employment.remove({}, (err) => {
+    if (err) {
+      console.log(err);
+    }
+    done();
+  });
+});
 
 describe('Create employment', () => {
   it('should create an employment', (done) => {
