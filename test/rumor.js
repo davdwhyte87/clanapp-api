@@ -4,12 +4,22 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../app';
+import Rumor from '../models/Rumor';
 
 chai.use(chaiHttp);
 const should = chai.should();
 
 let exampleRumorId = null;
 
+
+before('Drop database', (done) => {
+  Rumor.remove({}, (err) => {
+    if (err) {
+      console.log(err);
+    }
+    done();
+  });
+});
 describe('Test for rumor features', () => {
   it('should create a rumor', (done) => {
     const rumor = {

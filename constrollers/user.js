@@ -1,8 +1,11 @@
+/* eslint-disable no-underscore-dangle */
 import bcrypt from 'bcrypt';
-// import jwt from 'jsonwebtoken';
+import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import User from '../models/User';
 
+dotenv.config();
 /**
  * This function creates a new user
  * @param {Object} req - request object
@@ -35,4 +38,36 @@ const create = (req, res) => {
   });
 };
 
-export default create;
+/**
+ * This function signs a user in
+ * @param {Object} req - request object
+ * @param {Object} res - response object
+ * @returns {Object} - response object with the user id and a token
+ */
+const signin = async (req, res) => {
+  let user;
+  try {
+    user = await User.findOne({ email: req.body.email }).select('+password').exec();
+  } catch (error) {
+    console.log(error);
+  }
+  bcrypt.compare(req.body.password, user.password, (err, result) => {
+    if (err) {
+      console.log(err);
+      return res.status(400).json({ status: 400, error: 'An error occurred' });
+    }
+    if (result) {
+      const userData = user;
+      const userToken = jwt.sign({
+        id: userData._id,
+      }, process.env.JWT_KEY, {
+        expiresIn: '24h',
+      });
+      return res.status(200).json({
+        status: 200,
+        data: [{ id: userData.id, token: userToken }],
+      });
+    }
+  });
+};
+export { create, signin };
